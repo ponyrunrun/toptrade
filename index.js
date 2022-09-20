@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+const path = require("path");
 
 require("dotenv").config();
 
@@ -11,10 +12,10 @@ const app = express();
 
 app.use(cors({ credentials: true, origin: "*" }));
 
-
 app.set("json spaces", 2);
 
-app.use(express.static("public"))
+// app.use(express.static("public"))
+app.use("/", express.static(path.join(__dirname, "public")));
 
 const config = {
   headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -32,7 +33,11 @@ const authMappedData = Object.keys(authBody)
   })
   .join("&");
 
-app.get("/orders", (req, res) => {
+app.get("/api/", (req, res) => {
+  res.send("Some text");
+});
+
+app.get("/api/orders", (req, res) => {
   axios({
     method: "post",
     url: "https://carrier.superdispatch.com/oauth/token/",
@@ -48,11 +53,11 @@ app.get("/orders", (req, res) => {
       };
 
       const dataArr = [];
-      let count = 1;
+      let count = 4;
 
       function getPaginationData(nextUrl) {
         if (!count) {
-          res.send(dataArr);
+          res.json(dataArr);
           return;
         }
         count -= 1;
@@ -63,7 +68,7 @@ app.get("/orders", (req, res) => {
             return getPaginationData(res1.data.pagination.next);
           })
           .catch(() => {
-            res.send(dataArr);
+            res.json(dataArr);
             return;
           });
       }
