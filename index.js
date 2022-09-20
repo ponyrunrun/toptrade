@@ -37,6 +37,10 @@ app.get("/api/", (req, res) => {
   res.send("Some text");
 });
 
+app.get("/api/drivers", (req, res) => {
+  res.json([{id:"13333"}]);
+});
+
 app.get("/api/orders", (req, res) => {
   axios({
     method: "post",
