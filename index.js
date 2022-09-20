@@ -14,10 +14,9 @@ const app = express();
 app.use(cors({ credentials: true, origin: "*" }));
 
 app.set("json spaces", 2);
-app.use(timeout('15s'))
+app.use(timeout('25s'))
 
 
-// app.use(express.static("public"))
 app.use("/", express.static(path.join(__dirname, "public")));
 
 const config = {
