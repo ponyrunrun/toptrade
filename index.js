@@ -48,7 +48,7 @@ app.get("/orders", (req, res) => {
       };
 
       const dataArr = [];
-      let count = 4;
+      let count = 1;
 
       function getPaginationData(nextUrl) {
         if (!count) {
