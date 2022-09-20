@@ -52,7 +52,7 @@ app.get("/orders", (req, res) => {
 
       function getPaginationData(nextUrl) {
         if (!count) {
-          res.json(dataArr);
+          res.send(dataArr);
           return;
         }
         count -= 1;
@@ -63,7 +63,7 @@ app.get("/orders", (req, res) => {
             return getPaginationData(res1.data.pagination.next);
           })
           .catch(() => {
-            res.json(dataArr);
+            res.send(dataArr);
             return;
           });
       }
