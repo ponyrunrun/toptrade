@@ -32,7 +32,7 @@ const authMappedData = Object.keys(authBody)
   })
   .join("&");
 
-app.get("/", (req, res) => {
+app.get("/orders", (req, res) => {
   axios({
     method: "post",
     url: "https://carrier.superdispatch.com/oauth/token/",
