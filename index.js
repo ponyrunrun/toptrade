@@ -35,14 +35,6 @@ const authMappedData = Object.keys(authBody)
   })
   .join("&");
 
-app.get("/api/", (req, res) => {
-  res.send("Some text");
-});
-
-app.get("/api/drivers", (req, res) => {
-  res.json([{id:"13333"}]);
-});
-
 app.get("/api/orders", (req, res) => {
   axios({
     method: "post",
@@ -85,7 +77,8 @@ app.get("/api/orders", (req, res) => {
           const nextUrl = ordersRes.data.pagination.next;
           const data = ordersRes.data.data;
           dataArr.push(...data);
-          getPaginationData(nextUrl);
+          // getPaginationData(nextUrl);
+          res.send(dataArr);
         })
         .catch(() => {
           res.sendStatus(500);
